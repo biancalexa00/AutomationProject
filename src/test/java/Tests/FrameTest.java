@@ -2,6 +2,8 @@ package Tests;
 
 import HelperMethod.ElementMethods;
 import HelperMethod.FrameMethods;
+import Pages.FramePage;
+import Pages.HomePage;
 import SharedData.SharedData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -24,37 +26,12 @@ public class FrameTest extends SharedData {
         ElementMethods elementMethods= new ElementMethods(getWebDriver());
         FrameMethods frameMethods= new FrameMethods(getWebDriver());
 
-        //facem scroll in pagina
-        elementMethods.scrollElementByPixel(0,450);
+        HomePage homePage= new HomePage(getWebDriver());
+        homePage.navigateToAlertFrameWindowPage();
 
-        //identificam un element
-        WebElement consentField = getWebDriver().findElement(By.className("fc-button-label"));
-        elementMethods.clickElement(consentField);
-
-        elementMethods.scrollElementByPixel(0,450);
-        WebElement alertsField = getWebDriver().findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        elementMethods.clickElement(alertsField);
-
-        elementMethods.scrollElementByPixel(0,450);;
-        WebElement browserWindowsField = getWebDriver().findElement(By.xpath("//span[text()='Frames']"));
-        elementMethods.clickElement(browserWindowsField);
-
-        //interactionam cu un iFrame
-        frameMethods.switchSpecificIFrame("frame1");
-        WebElement frameElement= getWebDriver().findElement(By.id("sampleHeading"));
-        elementMethods.printElementText(frameElement);
-
-        //specificam sa revina la frame-ul principal
-        frameMethods.switchParentFrame();
-
-        frameMethods.switchSpecificIFrame("frame2");
-        WebElement frame2Element= getWebDriver().findElement(By.id("sampleHeading"));
-        elementMethods.printElementText(frame2Element);
-
+        FramePage framePage= new FramePage(getWebDriver());
+        framePage.dealWithFrame();
     }
-
-    // sa facem drivarul privat in toate testele TEMA!
-
 }
 
 

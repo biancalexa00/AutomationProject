@@ -22,6 +22,11 @@ public class ElementMethods {
             js.executeScript("window.scrollBy("+x+" ,"+y+")", "");
         }
 
+        public void clickElemForce (WebElement element){
+            JavascriptExecutor js = (JavascriptExecutor) webDriver;
+            js.executeScript("arguments[0].click();",element);
+        }
+
         public void waitVisibleElement (WebElement element){
             WebDriverWait wait= new WebDriverWait(webDriver, Duration.ofSeconds(5));
             wait.until(ExpectedConditions.visibilityOf(element));
