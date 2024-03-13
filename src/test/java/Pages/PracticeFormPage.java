@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.io.File;
 import java.util.Arrays;
@@ -30,7 +31,7 @@ public class PracticeFormPage extends BasePage{
     @FindBy(css = ".react-datepicker__input-container")
     public WebElement dateOfBirthField;
 
-    @FindBy(css = ".react-datepicker__month-select");
+    @FindBy(css = ".react-datepicker__month-select")
     public WebElement monthDateOfBirth;
 
     @FindBy(css = ".react-datepicker__year-select")
@@ -39,7 +40,7 @@ public class PracticeFormPage extends BasePage{
     @FindBy(xpath = "//div[not(contains(@class,'outside-month')) and contains(@class, 'react-datepicker__day react-datepicker__day')]")
     public List<WebElement> dayOfBirth;
 
-    @FindBy(css = "label[for='gender-radio-2']"));
+    @FindBy(css = "label[for='gender-radio-2']")
     public WebElement genderRadioButton;
 
     @FindBy(id = "currentAddress")
@@ -68,6 +69,17 @@ public class PracticeFormPage extends BasePage{
 
     @FindBy(xpath = "//div[@id='hobbiesWrapper']//label[ @class='custom-control-label']")
     public List<WebElement> HobbysList;
+
+    @FindBy(xpath ="//table/tbody/tr/td[2]")
+    public  List<WebElement> valueFields;
+
+    @FindBy(xpath = "//table/tbody/tr/td[1]")
+    public List<WebElement> lableFields;
+
+
+
+
+
 
     public void fillFirstName(String firstnameValue){
         elementMethods.fillElement(firstnameField,firstnameValue);
@@ -138,7 +150,41 @@ public class PracticeFormPage extends BasePage{
         elementMethods.clickElementForce(submit);
     }
 
+    public void validarePracticeForm(String firstnameValue, String lastnameValue, String emailValue, String numberValue, String subjectValue,
+                                     List<String> Hobbys, String currentValue){
 
+        Assert.assertEquals(lableFields.get(0).getText(), "Student Name");
+        Assert.assertEquals(valueFields.get(0).getText(), firstnameValue + " " + lastnameValue);
+
+        Assert.assertEquals(lableFields.get(1).getText(), "Student Email");
+        Assert.assertEquals(valueFields.get(1).getText(), emailValue);
+
+        Assert.assertEquals(lableFields.get(2).getText(), "Gender");
+        Assert.assertEquals(valueFields.get(2).getText(), "Female");
+
+        Assert.assertEquals(lableFields.get(3).getText(), "Mobile");
+        Assert.assertEquals(valueFields.get(3).getText(), numberValue);
+
+        Assert.assertEquals(lableFields.get(4).getText(), "Date of Birth");
+        Assert.assertEquals(valueFields.get(4).getText(), "12 February,2024");
+
+        Assert.assertEquals(lableFields.get(5).getText(), "Subjects");
+        Assert.assertEquals(valueFields.get(5).getText(), subjectValue);
+
+        Assert.assertEquals(lableFields.get(6).getText(), "Hobbies");
+        for (Integer index = 0; index < Hobbys.size(); index++) {
+            Assert.assertTrue(valueFields.get(6).getText().contains(Hobbys.get(index)));
+        }
+
+        Assert.assertEquals(lableFields.get(7).getText(), "Picture");
+        String[] arrayFile = filePath.split("/");
+        Integer desiredIndex = arrayFile.length - 1;
+        Assert.assertEquals(valueFields.get(7).getText(), arrayFile[desiredIndex]);
+
+        Assert.assertEquals(lableFields.get(8).getText(), "Address");
+        Assert.assertEquals(valueFields.get(8).getText(), currentValue);
+
+    }
 
 
 
