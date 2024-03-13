@@ -38,6 +38,8 @@ public class PracticForm extends SharedData {
         String subjectValue= "comp";
         String filePath= "src/test/resources/01.Randare (1).jpg";
         String addresValue= "Bucovina10";
+        String stateValue="NCR";
+        String cityValue2="Delhi";
 
 
 
@@ -53,24 +55,9 @@ public class PracticForm extends SharedData {
         practiceFormPage.pickSubjects(subjectValue);
         practiceFormPage.uploadPicture(filePath);
         practiceFormPage.pickAddress(addresValue);
-
-
-//        WebElement selectState= getWebDriver().findElement(By.xpath("//div[text()='Select State']"));
-//        elementMethods.clickElement(selectState);
-//
-//        WebElement selectSatete2= getWebDriver().findElement(By.id("react-select-3-input"));
-//        String stateValue="NCR";
-//        elementMethods.fillPressElement(selectSatete2,stateValue,Keys.ENTER);
-//
-//        WebElement selectCity= getWebDriver().findElement(By.xpath("//div[text()='Select City']"));
-//        elementMethods.clickElement(selectCity);
-//
-//        WebElement selectCity2= getWebDriver().findElement(By.id("react-select-4-input"));
-//        String cityValue2="Delhi";
-//        elementMethods.fillPressElement(selectCity2,cityValue2,Keys.ENTER);
-//
-//        WebElement submit= getWebDriver().findElement(By.id("submit"));
-//        elementMethods.clickElementForce(submit);
+        practiceFormPage.pickState(stateValue);
+        practiceFormPage.pickCity(cityValue2);
+        practiceFormPage.submit();
 //
 //        //validam tabelul cu valori
 //
