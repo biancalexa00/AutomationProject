@@ -124,6 +124,20 @@ public class PracticeFormPage extends BasePage{
         elementMethods.fillElement(currentAddres,addresValue);
     }
 
+    public void pickState(String stateValue){
+        elementMethods.clickElementForce(selectState);
+        elementMethods.fillPressElement(selectSatete2,stateValue,Keys.ENTER);
+    }
+
+    public void pickCity(String cityValue2){
+        elementMethods.clickElement(selectCity);
+        elementMethods.fillPressElement(selectCity2,cityValue2,Keys.ENTER);
+    }
+
+    public void submit(){
+        elementMethods.clickElementForce(submit);
+    }
+
 
 
 
