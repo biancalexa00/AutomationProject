@@ -30,7 +30,7 @@ public class PracticeFormPage extends BasePage{
     @FindBy(css = ".react-datepicker__input-container")
     public WebElement dateOfBirthField;
 
-    @FindBy(css = ".react-datepicker__month-select");
+    @FindBy(css = ".react-datepicker__month-select")
     public WebElement monthDateOfBirth;
 
     @FindBy(css = ".react-datepicker__year-select")
@@ -39,7 +39,7 @@ public class PracticeFormPage extends BasePage{
     @FindBy(xpath = "//div[not(contains(@class,'outside-month')) and contains(@class, 'react-datepicker__day react-datepicker__day')]")
     public List<WebElement> dayOfBirth;
 
-    @FindBy(css = "label[for='gender-radio-2']"));
+    @FindBy(css = "label[for='gender-radio-2']")
     public WebElement genderRadioButton;
 
     @FindBy(id = "currentAddress")
@@ -137,14 +137,6 @@ public class PracticeFormPage extends BasePage{
     public void submit(){
         elementMethods.clickElementForce(submit);
     }
-
-
-
-
-
-
-
-
 
 
 }

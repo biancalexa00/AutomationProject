@@ -14,7 +14,6 @@ public class SharedData {
     @BeforeMethod
     public void prepareDriver (){
         webDriver = new ChromeDriver();
-
         webDriver.get("https://demoqa.com/");
 
         //maximizarea ferestrei
