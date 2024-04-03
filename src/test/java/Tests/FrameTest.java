@@ -2,6 +2,7 @@ package Tests;
 
 import HelperMethod.ElementMethods;
 import HelperMethod.FrameMethods;
+import Pages.AlertsWindowFramePage;
 import Pages.FramePage;
 import Pages.HomePage;
 import SharedData.SharedData;
@@ -23,14 +24,14 @@ public class FrameTest extends SharedData {
 
     @Test
     public void frameMethod() {
-        ElementMethods elementMethods= new ElementMethods(getWebDriver());
-        FrameMethods frameMethods= new FrameMethods(getWebDriver());
-
-        HomePage homePage= new HomePage(getWebDriver());
+        HomePage homePage = new HomePage(getWebDriver());
         homePage.navigateToAlertFrameWindowPage();
 
-        FramePage framePage= new FramePage(getWebDriver());
-        framePage.dealWithFrame();
+        AlertsWindowFramePage alertWindowFramePage = new AlertsWindowFramePage(getWebDriver());
+        alertWindowFramePage.navigateToFramePage();
+
+        FramePage framePage = new FramePage(getWebDriver());
+        framePage.dealWithIFrame();
     }
 }
 

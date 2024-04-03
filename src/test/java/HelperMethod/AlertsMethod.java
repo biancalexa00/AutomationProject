@@ -10,36 +10,31 @@ import org.testng.Assert;
 import java.time.Duration;
 
 public class AlertsMethod {
-
-
-    public WebDriver webDriver;
+    private WebDriver webDriver;
 
     public AlertsMethod(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
-    public void acceptAlert(){
-        waitAllert();
-        Alert firstAlert= webDriver.switchTo().alert();
-        firstAlert.accept();
+    public void acceptAlert() {
+        waitForAlert();
+        Alert secondAlert = webDriver.switchTo().alert();
+        secondAlert.accept();
     }
 
-    public void cancelAllert (){
-        waitAllert();
-        Alert firstAlert= webDriver.switchTo().alert();
-        firstAlert.dismiss();
+    public void dismissAlert() {
+        Alert secondAlert = webDriver.switchTo().alert();
+        secondAlert.dismiss();
     }
 
-    public void waitAllert (){
-        WebDriverWait wait=new WebDriverWait(webDriver, Duration.ofSeconds(10));
+    public void waitForAlert() {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.alertIsPresent());
     }
 
-    public void fillAllert (String value){
-        Alert forthAlert= webDriver.switchTo().alert();
-        forthAlert.sendKeys(value);
-        forthAlert.accept();
-
+    public void fillAlert(String text) {
+        Alert promptAlert = webDriver.switchTo().alert();
+        promptAlert.sendKeys(text);
+        promptAlert.accept();
     }
-
 }
