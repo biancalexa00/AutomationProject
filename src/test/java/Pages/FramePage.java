@@ -11,15 +11,14 @@ public class FramePage extends BasePage {
     }
 
     @FindBy(id = "sampleHeading")
-    public WebElement frameElement;
+    private WebElement textFrame;
 
-    public void dealWithFrame(){
+    public void dealWithIFrame() {
+
         frameMethods.switchSpecificIFrame("frame1");
-        System.out.println(frameElement.getText());
         frameMethods.switchParentFrame();
-
         frameMethods.switchSpecificIFrame("frame2");
-        System.out.println(frameElement.getText());
+
     }
 
 

@@ -1,147 +1,186 @@
 package Pages;
 
+import ObjectData.PracticeFormObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 public class PracticeFormPage extends BasePage{
     public PracticeFormPage(WebDriver webDriver) {
         super(webDriver);
     }
-
     @FindBy(id = "firstName")
-    public WebElement firstnameField;
-
+    private WebElement firstNameField;
     @FindBy(css = "input[placeholder='Last Name']")
-    public WebElement lastnameField;
-
+    private WebElement lastNameField;
     @FindBy(id = "userEmail")
-    public WebElement emailField;
-
-    @FindBy(id = "userNumber")
-    public WebElement numberField;
-
+    private WebElement emailField;
+    @FindBy(css = "input[placeholder='Mobile Number']")
+    private WebElement mobileNoField;
     @FindBy(css = ".react-datepicker__input-container")
-    public WebElement dateOfBirthField;
-
-    @FindBy(css = ".react-datepicker__month-select");
-    public WebElement monthDateOfBirth;
-
+    private WebElement dobField;
+    @FindBy(css = ".react-datepicker__month-select")
+    private WebElement dobMonth;
     @FindBy(css = ".react-datepicker__year-select")
-    public WebElement yearDateOfBirth;
-
-    @FindBy(xpath = "//div[not(contains(@class,'outside-month')) and contains(@class, 'react-datepicker__day react-datepicker__day')]")
-    public List<WebElement> dayOfBirth;
-
-    @FindBy(css = "label[for='gender-radio-2']"));
-    public WebElement genderRadioButton;
-
-    @FindBy(id = "currentAddress")
-    public WebElement currentAddres;
-
+    private WebElement yearField;
+    @FindBy(xpath = "//div[not(contains(@class, 'outside-month')) and contains(@class, 'react-datepicker__day react-datepicker__day')]")
+    private List<WebElement> dayDOBFields;
+    @FindBy(css = "label[for=gender-radio-1")
+    private WebElement userGender;
+    @FindBy(xpath = "//div[@id='hobbiesWrapper']//label[@class='custom-control-label']")
+    private List<WebElement> hobbiesList;
     @FindBy(id = "subjectsInput")
-    public WebElement subjectField;
-
+    private WebElement userSubjects;
     @FindBy(id = "uploadPicture")
-    public WebElement pictureFiedl;
-
+    private WebElement uploadPicture;
+    @FindBy(css = "textarea[placeholder='Current Address']")
+    private WebElement adress;
     @FindBy(xpath = "//div[text()='Select State']")
-    public WebElement selectState;
-
+    private WebElement selectState;
     @FindBy(id = "react-select-3-input")
-    public WebElement selectSatete2;
-
+    private WebElement selectState2;
     @FindBy(xpath = "//div[text()='Select City']")
-    public WebElement selectCity;
-
+    private WebElement selectCity;
     @FindBy(id = "react-select-4-input")
-    public WebElement selectCity2;
-
+    private WebElement selectCity2;
     @FindBy(id = "submit")
-    public WebElement submit;
+    private WebElement submit;
+    @FindBy(xpath = "//table/tbody/tr/td[1]")
+    private List<WebElement> labelFields;
+    @FindBy(xpath = "//table/tbody/tr/td[2]")
+    private List<WebElement> valuesFields;
 
-    @FindBy(xpath = "//div[@id='hobbiesWrapper']//label[ @class='custom-control-label']")
-    public List<WebElement> HobbysList;
 
-    public void fillFirstName(String firstnameValue){
-        elementMethods.fillElement(firstnameField,firstnameValue);
-        elementMethods.scrollElementByPixel(0,450);
+    public void fillFirstName(String firstNameFieldValue){
+        elementMethods.fillElement(firstNameField, firstNameFieldValue);
+        elementMethods.scrollElementByPixel(0, 450);
     }
 
-    public void fillLastName(String lastnameValue){
-        elementMethods.fillElement(lastnameField,lastnameValue);
+    public void fillLastName(String lastNameFieldValue){
+        elementMethods.fillElement(lastNameField, lastNameFieldValue);
     }
 
-    public void fillEmailFild(String emailValue){
-        elementMethods.fillElement(emailField,emailValue);
+    public void fillEmailField(String emailFieldValue){
+        elementMethods.fillElement(emailField, emailFieldValue);
     }
 
-    public void fillNumberFild(String numberValue){
-        elementMethods.fillElement(numberField,numberValue);
+    public void fillMobileNoField(String mobileNoFieldValue){
+        elementMethods.fillElement(mobileNoField, mobileNoFieldValue);
     }
 
-    public void pickBirtDate(String monthValue, String yearValue, String dayValue){
-        elementMethods.clickElement(dateOfBirthField);
-        elementMethods.selectTextElement(monthDateOfBirth,monthValue);
-        elementMethods.selectValueElement(yearDateOfBirth,yearValue);
-        for (Integer i=0; i<dayOfBirth.size(); i++) {
-            if (dayOfBirth.get(i).getText().equals(dayValue)) {
-                dayOfBirth.get(i).click();
+    public void pickBirthDate(String dobMonthValue, String yearValue, String dayValue){
+        elementMethods.clickElement(dobField);
+        elementMethods.selectTextElement(dobMonth,dobMonthValue);
+        elementMethods.selectValueElement(yearField, yearValue);
+
+        for (Integer i = 0; i < dayDOBFields.size(); i++){
+            if (dayDOBFields.get(i).getText().equals(dayValue)){
+                dayDOBFields.get(i).click();
                 break;
             }
         }
-
     }
 
     public void pickGender(String genderValue){
-        genderRadioButton.click();
+        userGender.click();
     }
 
     public void pickHobbies(List<String> hobbies){
-        for (Integer index=0; index<HobbysList.size(); index++){
-            String currentElementText= HobbysList.get(index).getText();
+        for (Integer i = 0; i < hobbiesList.size(); i++){
+            String currentElementText = hobbiesList.get(i).getText();
             if (hobbies.contains(currentElementText)){
-                elementMethods.clickElemForce(HobbysList.get(index));
+                //hobbiesList.get(i).click();
+                elementMethods.clickElemForce(hobbiesList.get(i));
             }
         }
     }
 
-    public void pickSubjects(String subjectValue){
-        elementMethods.fillPressElement(subjectField,subjectValue, Keys.ENTER);
+    public void pickSubjects(String userSubjectsValue){
+        elementMethods.fillPressElement(userSubjects,userSubjectsValue, Keys.ENTER);
     }
 
     public void uploadPicture(String filePath){
-        elementMethods.fillElement(pictureFiedl,new File("src/test/resources/01.Randare (1).jpg").getAbsolutePath());
+        elementMethods.fillElement(uploadPicture,new File(filePath).getAbsolutePath());
     }
 
-    public void pickAddress(String addresValue){
-        elementMethods.fillElement(currentAddres,addresValue);
+    public void pickAddress(String addressValue){
+        elementMethods.fillElement(adress, addressValue);
     }
 
-    public void pickState(String stateValue){
-        elementMethods.clickElementForce(selectState);
-        elementMethods.fillPressElement(selectSatete2,stateValue,Keys.ENTER);
+    public void pickState(String stateLoc){
+        elementMethods.clickElemForce(selectState);
+        elementMethods.fillPressElement(selectState2,stateLoc,Keys.ENTER);
     }
 
-    public void pickCity(String cityValue2){
-        elementMethods.clickElement(selectCity);
-        elementMethods.fillPressElement(selectCity2,cityValue2,Keys.ENTER);
+    public void pickCity(String cityLoc){
+        elementMethods.clickElemForce(selectCity);
+        elementMethods.fillPressElement(selectCity2, cityLoc, Keys.ENTER);
     }
 
-    public void submit(){
-        elementMethods.clickElementForce(submit);
+    public void clickSubmit(){
+        elementMethods.clickElemForce(submit);
     }
 
+    public void validatePracticeFormTable(PracticeFormObject practiceFormObject){
+        Assert.assertEquals(labelFields.get(0).getText(),"Student Name");
+        Assert.assertEquals(valuesFields.get(0).getText(),practiceFormObject.getFirstNameFieldValue() + " " + practiceFormObject.getLastNameFieldValue());
 
+        Assert.assertEquals(labelFields.get(1).getText(), "Student Email");
+        Assert.assertEquals(valuesFields.get(1).getText(), practiceFormObject.getEmailFieldValue());
 
+        Assert.assertEquals(labelFields.get(2).getText(), "Gender");
+        Assert.assertEquals(valuesFields.get(2).getText(), practiceFormObject.getGenderValue());
 
+        Assert.assertEquals(labelFields.get(3).getText(), "Mobile");
+        Assert.assertEquals(valuesFields.get(3).getText(), practiceFormObject.getMobileNoFieldValue());
 
+        Assert.assertEquals(labelFields.get(4).getText(), "Date of Birth");
+        // Assert.assertEquals(valuesFields.get(4).getText(), dobField );
+
+        Assert.assertEquals(labelFields.get(5).getText(), "Subjects");
+        Assert.assertEquals(valuesFields.get(5).getText(), practiceFormObject.getSubjectValue());
+
+        Assert.assertEquals(labelFields.get(6).getText(), "Hobbies");
+        for (Integer i = 0; i < practiceFormObject.getHobbies().size(); i++) {
+            Assert.assertTrue(valuesFields.get(6).getText().contains(practiceFormObject.getHobbies().get(i)));
+        }
+
+        Assert.assertEquals(labelFields.get(7).getText(), "Picture");
+        String[] arrayFile = practiceFormObject.getFilePath().split("/");
+        Integer desiredIndex = arrayFile.length -1;
+        Assert.assertEquals(valuesFields.get(7).getText(),arrayFile[desiredIndex]);
+
+        // TEMA: de continuat validarile
+
+        Assert.assertEquals(labelFields.get(8).getText(), "Address");
+        Assert.assertEquals(valuesFields.get(8).getText(), practiceFormObject.getAddressValue());
+
+        Assert.assertEquals(labelFields.get(9).getText(), "State and City");
+        Assert.assertEquals(valuesFields.get(9).getText(), practiceFormObject.getStateLoc()+ " " + practiceFormObject.getCityLoc());
+
+    }
+
+    public void fillEntireForm(PracticeFormObject practiceFormObject){
+        fillFirstName(practiceFormObject.getFirstNameFieldValue());
+        fillLastName(practiceFormObject.getLastNameFieldValue());
+        fillEmailField(practiceFormObject.getEmailFieldValue());
+        fillMobileNoField(practiceFormObject.getMobileNoFieldValue());
+        pickBirthDate(practiceFormObject.getDobMonthValue(), practiceFormObject.getYearValue(), practiceFormObject.getDayValue());
+        pickGender(practiceFormObject.getGenderValue());
+        pickHobbies(practiceFormObject.getHobbies());
+        pickSubjects(practiceFormObject.getUserSubjectsValue());
+        uploadPicture(practiceFormObject.getFilePath());
+        pickAddress(practiceFormObject.getAddressValue());
+        pickState(practiceFormObject.getStateLoc());
+        pickCity(practiceFormObject.getCityLoc());
+        clickSubmit();
+    }
 
 
 

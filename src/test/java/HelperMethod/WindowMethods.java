@@ -16,9 +16,7 @@ public class WindowMethods {
 
     public void switchSpecificTabWindow (Integer index){
         List<String> tabsOpened= new ArrayList<>(webDriver.getWindowHandles());
-//        System.out.println("Tabul curent are URL-ul " +webDriver.getCurrentUrl());
-        webDriver.switchTo().window(tabsOpened.get(1));
-        System.out.println("Tabul curent are URL-ul " +webDriver.getCurrentUrl());
+        webDriver.switchTo().window(tabsOpened.get(index));
     }
 
     public void closeCurrentWindow (){
