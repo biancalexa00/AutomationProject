@@ -1,5 +1,6 @@
 package SharedData;
 
+import SharedData.browser.BrowserFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,10 +16,7 @@ public class SharedData {
 
     @BeforeMethod
     public void prepareDriver (){
-        webDriver = new ChromeDriver();
-        webDriver.manage().window().maximize();
-        webDriver.get("https://demoqa.com/");
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        webDriver = new BrowserFactory().getBrowserInstance();
     }
     @AfterMethod
     public void clearDriver (){
