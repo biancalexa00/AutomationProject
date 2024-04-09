@@ -1,6 +1,7 @@
 package Pages;
 
 import HelperMethod.ElementMethods;
+import loggerUtility.LoggerUtility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,17 +24,23 @@ public class HomePage extends BasePage{
 
     public void navigateToAlertFrameWindowPage(){
         elementMethods.scrollElementByPixel(0, 450);
+        LoggerUtility.infoTest("The user scrolls down the page");
 //        elementMethods.clickElement(consentField);
         elementMethods.clickElement(alertsField);
+        LoggerUtility.infoTest("The user clicks on element");
     }
 
     public void navigateToFormsPage(){
         elementMethods.scrollElementByPixel(0, 450);
+        LoggerUtility.infoTest("The user scrolls down the page");
         elementMethods.clickElement(formsField);
+        LoggerUtility.infoTest("The user clicks on element");
     }
     public void navigateToElementsPage(){
         elementMethods.scrollElementByPixel(0, 450);
+        LoggerUtility.infoTest("The user scrolls down the page");
         elementMethods.clickElement(elementsField);
+        LoggerUtility.infoTest("The user clicks on element");
     }
 
 }
